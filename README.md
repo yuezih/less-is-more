@@ -25,7 +25,7 @@
 
 ---
 
-> To be contunued...
+<!-- > To be contunued... -->
 
 ## Selective EOS Supervision
 
@@ -33,7 +33,7 @@
 
 Following the instruction of [LLaVA](https://github.com/haotian-liu/LLaVA) to prepare the environment, data (`LLaVA-Instruction-150K`) and pretraining models (e.g., `LLaVA-1.5-7b`). 
 
-Train the selective EOS supervision model. The default configuration is set to train the `llava-1.5-7b` model with `Detail23k` for one epoch.
+Train the model with Selective EOS Supervision. The default configuration is set to train the `llava-1.5-7b` model with `Detail23k` for one epoch.
 
 ```bash
 cd LLaVA
