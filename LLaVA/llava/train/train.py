@@ -736,6 +736,9 @@ class LazySupervisedDataset(Dataset):
             # image does not exist in the data, but the model is multimodal
             crop_size = self.data_args.image_processor.crop_size
             data_dict['image'] = torch.zeros(3, crop_size['height'], crop_size['width'])
+
+        data_dict['image_file'] = image_file
+        
         return data_dict
 
 
@@ -761,6 +764,7 @@ class DataCollatorForSupervisedDataset(object):
             input_ids=input_ids,
             labels=labels,
             attention_mask=input_ids.ne(self.tokenizer.pad_token_id),
+            image_file=[instance['image_file'] for instance in instances],
         )
 
         if 'image' in instances[0]:

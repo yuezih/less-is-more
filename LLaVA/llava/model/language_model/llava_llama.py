@@ -26,6 +26,7 @@ from transformers.generation.utils import GenerateOutput
 
 from ..llava_arch import LlavaMetaModel, LlavaMetaForCausalLM
 
+import torch.nn.functional as F
 
 class LlavaConfig(LlamaConfig):
     model_type = "llava_llama"
@@ -88,7 +89,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                 image_sizes
             )
 
-        return super().forward(
+        outputs = super().forward(
             input_ids=input_ids,
             attention_mask=attention_mask,
             position_ids=position_ids,
@@ -100,6 +101,32 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             output_hidden_states=output_hidden_states,
             return_dict=return_dict
         )
+
+        origin = 0 # whether to adopt Selective EOS Supervision
+
+        if origin:
+            return outputs
+
+        # Selective EOS Supervision
+        logits = outputs.logits
+        shift_logits = logits[..., :-1, :].contiguous() # [batch_size, seq_len, vocab_size]
+        shift_labels = labels[..., 1:].contiguous() # [batch_size, seq_len]
+        valid_pos = (shift_labels != -100).view(-1)
+        valid_logits = shift_logits.view(-1, self.vocab_size)[valid_pos]
+        valid_labels = shift_labels.view(-1)[valid_pos]
+
+        non_eos_idx = torch.ones_like(valid_logits)
+        # for all positions, set the mask on the EOS token to 0
+        non_eos_idx[:, 2] = 0
+        # for positions where the label is EOS, set the maks on the EOS token to 1
+        final_idx = non_eos_idx.scatter_(1, valid_labels.unsqueeze(-1), True)
+
+        selected_logits = valid_logits.masked_fill(final_idx==0, -float('inf'))
+        loss = F.cross_entropy(selected_logits, valid_labels, reduction='mean')
+        outputs.loss = loss
+
+        return outputs
+
 
     @torch.no_grad()
     def generate(

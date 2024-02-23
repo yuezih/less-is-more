@@ -1,12 +1,12 @@
-RUN_NAME=llava-v1.5-7b
-MODEL_NAME=checkpoint/$RUN_NAME
+RUN_NAME=your-model-folder
+MODEL_NAME=LLaVA/checkpoint/$RUN_NAME
 MODEL_BASE=llava-v1.5-7b
 
 echo "========================="
 echo "MODEL: $RUN_NAME"
 echo "========================="
 
-CUDA_VISIBLE_DEVICES=3 \
+CUDA_VISIBLE_DEVICES=0 \
 python LLaVA/llava/eval/model_vqa.py \
 --model-path $MODEL_NAME \
 --model-base $MODEL_BASE \

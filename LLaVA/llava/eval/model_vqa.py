@@ -75,6 +75,7 @@ def eval_model(args):
 
         ans_id = shortuuid.uuid()
         ans_file.write(json.dumps({"question_id": idx,
+                                   "image_id": image_file,
                                    "prompt": cur_prompt,
                                    "text": outputs,
                                    "answer_id": ans_id,
