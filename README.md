@@ -39,7 +39,7 @@ Train the model with Selective EOS Supervision. The default configuration is set
 cd LLaVA
 bash scripts/v1_5/selective_eos_finetune.sh
 ```
-The main modifications to the original LLaVA code for Selective EOS Supervision is detailed in [./docs/selective-eos-supervision.md](./docs/selective-eos-supervision.md).
+The main modifications to the original LLaVA code for Selective EOS Supervision are detailed in [./docs/selective-eos-supervision.md](./docs/selective-eos-supervision.md).
 
 ### Checkpoint
 
@@ -49,6 +49,35 @@ Basic Model | Finetuning Data | Checkpoint
  :- | :- | :-
 `llava-1.5-7b` | `Detail23k` | [llava-v1.5-7b-selective-23k](https://huggingface.co/yuezih/llava-v1.5-7b-selective-23k)
 `llava-1.5-7b` | `LLaVA-Instruction-150K` | [llava-v1.5-7b-selective-150k](https://huggingface.co/yuezih/llava-v1.5-7b-selective-150k)
+
+
+## Scoring EOS Supervision
+
+### Data Scoring
+
+For the LLaVA codebase, due to some constraints related to deepspeed, currently I have no idea about how to efficiently score a dataset with a standalone script. Our scoring relies on the training process, i.e., for each training step:
+- Score the data in the minibatch and save the scores;
+- Cancel loss backward (can be achieved by modifying the trainer code).
+
+The core code for data scoring are provided in `./LLaVA/llava/model/language_model/llava_llama_filter.py`.
+
+### Filtered Data
+
+Our data filtered with Scoring EOS Supervision:
+
+Basic Data | Filtered Data
+:- | :-
+`LLaVA-Instruction-150K` | [LLaVA-Instruction-150K-filtered](./LLaVA/playground/data/llava_instruction_150k_filtered.json)
+
+### Training
+
+Instruction tune the LLaVA-7b model on our filtered data with:
+
+```bash
+cd LLaVA
+bash scripts/finetune_qlora_filtered.sh
+```
+
 
 ## CHAIR Evaluation
 
