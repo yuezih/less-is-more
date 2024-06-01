@@ -38,7 +38,7 @@ What you can find in this repo:
 - CHAIR evaluation
   - evaluation scripts
   - our test set data
-- Other
+- others
   - our CHAIR captioning [results](./CHAIR-eval/data/Table1-results)
 
 
