@@ -25,8 +25,6 @@
 
 ---
 
-<!-- > To be contunued... -->
-
 ## Selective EOS Supervision
 
 ### Training
@@ -43,12 +41,12 @@ The main modifications to the original LLaVA code for Selective EOS Supervision 
 
 ### Checkpoint
 
-Our models finetuned with Selective EOS Supervision:
+Our models (LoRA weights) finetuned with Selective EOS Supervision:
 
 Basic Model | Finetuning Data | Checkpoint
  :- | :- | :-
-`llava-1.5-7b` | `Detail23k` | [llava-v1.5-7b-selective-23k](https://huggingface.co/yuezih/llava-v1.5-7b-selective-23k)
-`llava-1.5-7b` | `LLaVA-Instruction-150K` | [llava-v1.5-7b-selective-150k](https://huggingface.co/yuezih/llava-v1.5-7b-selective-150k)
+`llava-1.5-7b` | `Detail23k` | [llava-v1.5-7b-selective-23k-lora](https://huggingface.co/yuezih/llava-v1.5-7b-selective-23k-lora)
+`llava-1.5-7b` | `LLaVA-Instruction-150K` | [llava-v1.5-7b-selective-150k-lora](https://huggingface.co/yuezih/llava-v1.5-7b-selective-150k-lora)
 
 
 ## Scoring EOS Supervision
