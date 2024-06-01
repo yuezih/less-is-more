@@ -25,6 +25,23 @@
 
 ---
 
+## Checklist
+
+What you can find in this repo:
+
+- Selective EOS Supervision
+  - training code
+  - trained model checkpoints
+- Scoring EOS Supervision
+  - data filtering code
+  - filtered data
+- CHAIR evaluation
+  - evaluation scripts
+  - our test set data
+- Other
+  - our CHAIR captioning [results](./CHAIR-eval/data/Table1-results)
+
+
 ## Selective EOS Supervision
 
 ### Training
