@@ -1,29 +1,6 @@
-<div>
-  <h2 align="center">
-    Less is More
-  </h2>
-</div>
-
-<p align="center">
-    <a >
-       <img alt="Issues" src="https://img.shields.io/github/issues/yuezih/less-is-more?color=blueviolet" />
-  	</a>
-    <a >
-       <img alt="Forks" src="https://img.shields.io/github/forks/yuezih/less-is-more?color=orange" />
-  	</a>
-    <a >
-       <img alt="Stars" src="https://img.shields.io/github/stars/yuezih/less-is-more?color=ff69b4" />
-  	</a>
-    <a >
-      <img alt="Static Badge" src="https://img.shields.io/badge/arXiv-2402.14545-b31b1b?style=flat&link=https%3A%2F%2Farxiv.org%2Fabs%2F2402.14545">
-  	</a>
-    <br />
-</p>
-
-
-[Less is More: Mitigating Multimodal Hallucination from an EOS Decision Perspective](https://arxiv.org/abs/2402.14545)
-
----
+<a href="https://arxiv.org/pdf/2402.14545" class="brand-link w-nav-brand">
+    <img loading="lazy" src="assets/title.png" alt=""/>
+</a>
 
 ## Checklist
 
@@ -54,7 +31,7 @@ Train the model with Selective EOS Supervision. The default configuration is set
 cd LLaVA
 bash scripts/v1_5/selective_eos_finetune.sh
 ```
-The main modifications to the original LLaVA code for Selective EOS Supervision are detailed in [./docs/selective-eos-supervision.md](./docs/selective-eos-supervision.md).
+The main modifications to the original LLaVA code for Selective EOS Supervision are detailed in [./assets/selective-eos-supervision.md](./assets/selective-eos-supervision.md).
 
 ### Checkpoint
 
