@@ -77,12 +77,27 @@ bash scripts/finetune_qlora_filtered.sh
 
 The test set used in our paper for CHAIR evaluation is provided in [./CHAIR-eval/data/chair-500.jsonl](./CHAIR-eval/data/chair-500.jsonl). The data is randomly sampled from the MSCOCO validation set with a random seed of 0.
 
-For test set images, we provide a [python script](./CHAIR-eval/prepare_data.py) to collect images from the original MSCOCO images with softlinks. Please specify the path of your own MSCOCO image path. The script will create a folder `./CHAIR-eval/data/chair-500` for the CHAIR images.
+#### CHAIR Images
 
+We provide two ways to collect test set images:
+
+- a [python script](./CHAIR-eval/prepare_data.py) to collect images from the original MSCOCO images with softlinks. Please specify the path of your own MSCOCO image path. The script will create a folder `./CHAIR-eval/data/chair-500` for the CHAIR images.
+  ```bash
+  python ./CHAIR-eval/prepare_data.py
+  ```
+- a [OneDrive link](https://1drv.ms/u/c/97dec68abb271787/ERCcXm0ZeiFGl96K6tG1xz4Bs0YYDFu9pcSA6OacLgZhTw?e=8e6eA8) to download the 500 images. Unzip the images to `./CHAIR-eval/data/chair-500`.
+
+#### MSCOCO Annotation
+
+Use the following command to download the annotation files of MSCOCO detection, which will be used for CHAIR evaluation:
 ```bash
-python ./CHAIR-eval/prepare_data.py
-```
-The script also downloads the annotation files of MSCOCO detection, which will be used for CHAIR evaluation.
+cd ./CHAIR-eval/data
+wget http://images.cocodataset.org/annotations/annotations_trainval2014.zip
+mkdir MSCOCO
+unzip -d MSCOCO/annotation annotations_trainval2014.zip
+  ```
+
+
 
 ### Evaluation
 
@@ -92,6 +107,9 @@ Set your model in the following script and then run it:
 ```bash
 bash ./CHAIR-eval/eval.sh
 ```
+`MODEL_NAME`: lora weights, e.g., `yuezih/llava-v1.5-7b-selective-23k-lora`  
+`MODEL_BASE`: base model checkpoint, e.g., `liuhaotian/llava-v1.5-7b`
+
 The first-time evaluation can be slow because of the ground-truth object set construction. Subsequent evaluations will be faster with the cache.
 
 
