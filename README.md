@@ -16,7 +16,7 @@ What you can find in this repo:
   - evaluation scripts
   - our test set data
 - others
-  - our CHAIR captioning [results](./CHAIR-eval/data/Table1-results)
+  - [generated captions](./CHAIR-eval/data/Table1-results) in [Table 1](https://arxiv.org/html/2402.14545v2#S3.T1)
 
 
 ## Selective EOS Supervision
@@ -59,7 +59,7 @@ Our data filtered with Scoring EOS Supervision:
 
 Basic Data | Filtered Data
 :- | :-
-`LLaVA-Instruction-150K` | [LLaVA-Instruction-150K-filtered](./LLaVA/playground/data/llava_instruction_150k_filtered.json)
+`LLaVA-Instruction-150K` | LLaVA-Instruction-150K-filtered [[OneDrive]](https://1drv.ms/u/c/97dec68abb271787/EdVLzADx-SVFtHL2sHyg4LEBQfY6SlyuNFY6f0_qcLPMjA?e=UWGWbF)
 
 ### Training
 
